@@ -69,17 +69,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         private void RegisterNow(final String username, String email, String password){
-            auth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                           if(task.isSuccessful()){
                               FirebaseUser firebaseUser = auth.getCurrentUser();
+                              assert firebaseUser != null;
                               String userid = firebaseUser.getUid();
 
                               myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
 
-
+                              DatabaseReference sync = FirebaseDatabase.getInstance().getReference("MyUsers");
+                              sync.keepSynced(true);
                               HashMap<String,String> hashMap = new HashMap<>();
                               hashMap.put("id",userid);
                               hashMap.put("username",username);
