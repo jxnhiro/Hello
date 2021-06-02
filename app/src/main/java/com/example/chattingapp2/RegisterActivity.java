@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+
+import static android.content.ContentValues.TAG;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -73,13 +76,17 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                           if(task.isSuccessful()){
+                              DatabaseReference mDatabase;
+
+                              mDatabase = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+                              Log.i(TAG," Reference is: "+mDatabase.toString());
                               FirebaseUser firebaseUser = auth.getCurrentUser();
                               assert firebaseUser != null;
                               String userid = firebaseUser.getUid();
 
-                              myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
+                              myRef = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("MyUsers").child(userid);
 
-                              DatabaseReference sync = FirebaseDatabase.getInstance().getReference("MyUsers");
+                              DatabaseReference sync = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("MyUsers");
                               sync.keepSynced(true);
                               HashMap<String,String> hashMap = new HashMap<>();
                               hashMap.put("id",userid);

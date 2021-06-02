@@ -54,7 +54,7 @@ public class UserFragment extends Fragment {
 
     private void ReadUsers(){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("MyUsers");
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("MyUsers");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

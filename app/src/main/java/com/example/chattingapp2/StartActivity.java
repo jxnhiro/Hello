@@ -41,7 +41,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        myRef = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        myRef = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(firebaseUser.getUid());
 
 
         //Pas value user keganti
@@ -65,7 +65,7 @@ public class StartActivity extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new ChatFragment(), "Chats");
         viewPagerAdapter.addFragment(new UserFragment(), "Users");
-        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+        //viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
