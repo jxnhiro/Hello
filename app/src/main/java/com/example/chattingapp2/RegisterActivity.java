@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         TextView gotologin;
         Button register_button;
 
+        //Firebase
         FirebaseAuth auth;
         DatabaseReference myRef;
         @Override
@@ -53,10 +54,13 @@ public class RegisterActivity extends AppCompatActivity {
                     String username_text = username_register.getText().toString();
                     String email_text = email_register.getText().toString();
                     String pass_text = password_register.getText().toString();
+                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
                     if(TextUtils.isEmpty(username_text) || TextUtils.isEmpty(email_text) || TextUtils.isEmpty(pass_text)){
                         Toast.makeText(RegisterActivity.this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else if (!email_text.matches(emailPattern)) {
+                        Toast.makeText(RegisterActivity.this, "Email format invalid!", Toast.LENGTH_SHORT).show();
+                    } else {
                         RegisterNow(username_text,email_text,pass_text);
                     }
                 }
