@@ -51,6 +51,17 @@ public class RegisterActivity extends AppCompatActivity {
 
             auth = FirebaseAuth.getInstance();
 
+            gotologin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                    //Clear data sebelum memasuki class StartActivity
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    finish();
+                }
+            });
+
             register_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
