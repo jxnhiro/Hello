@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             email_register = findViewById(R.id.email_register);
             password_register = findViewById(R.id.password_register);
             gotologin = findViewById(R.id.gotologin);
-            register_button = findViewById(R.id.register_button);
+            register_button = findViewById(R.id.btn_reset);
             introvert = findViewById(R.id.introvertButton);
             extrovert = findViewById(R.id.extrovertButton);
             ambivert = findViewById(R.id.ambivertButton);
