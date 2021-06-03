@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Firebase
         FirebaseAuth auth;
         DatabaseReference myRef;
+        RadioButton introvert, extrovert, ambivert;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -47,7 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
             password_register = findViewById(R.id.password_register);
             gotologin = findViewById(R.id.gotologin);
             register_button = findViewById(R.id.register_button);
-
+            introvert = findViewById(R.id.introvertButton);
+            extrovert = findViewById(R.id.extrovertButton);
+            ambivert = findViewById(R.id.ambivertButton);
 
             auth = FirebaseAuth.getInstance();
 
@@ -69,20 +73,33 @@ public class RegisterActivity extends AppCompatActivity {
                     String email_text = email_register.getText().toString();
                     String pass_text = password_register.getText().toString();
                     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
+                    String intro = introvert.getText().toString();
+                    String extro = extrovert.getText().toString();
+                    String ambi = ambivert.getText().toString();
                     if(TextUtils.isEmpty(username_text) || TextUtils.isEmpty(email_text) || TextUtils.isEmpty(pass_text)){
                         Toast.makeText(RegisterActivity.this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
                     } else if (!email_text.matches(emailPattern)) {
                         Toast.makeText(RegisterActivity.this, "Email format invalid!", Toast.LENGTH_SHORT).show();
                     } else {
-                        RegisterNow(username_text,email_text,pass_text);
+                        if (introvert.isChecked()){
+                            RegisterNow(username_text,email_text,pass_text,intro);
+                        }
+                        else if (extrovert.isChecked()){
+                            RegisterNow(username_text,email_text,pass_text,extro);
+                        }
+                        else if (ambivert.isChecked()){
+                            RegisterNow(username_text,email_text,pass_text,ambi);
+                        }
+                        else{
+                            Toast.makeText(RegisterActivity.this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });
 
         }
 
-        private void RegisterNow(final String username, String email, String password){
+        private void RegisterNow(final String username, String email, String password, String group){
             auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -103,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                               hashMap.put("id",userid);
                               hashMap.put("username",username);
                               hashMap.put("imageURL","default");
+                              hashMap.put("group", group);
 
                               myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                   @Override

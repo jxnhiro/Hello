@@ -1,6 +1,7 @@
 package com.example.chattingapp2.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.chattingapp2.MessageActivity;
 import com.example.chattingapp2.R;
+import com.example.chattingapp2.StartActivity;
 
 
 import java.util.List;
@@ -38,13 +41,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users users = mUsers.get(position);
         holder.username.setText(users.getUsername());
-
+        holder.groupText.setText(users.getGroup());
         if(users.getImageURL().equals("default")){
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }
         else{
             Glide.with(context).load(users.getImageURL()).into(holder.imageView);
         }
+
+        //Click listener to chat
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 = new Intent (context, MessageActivity.class);
+                i2.putExtra("userid", users.getId());
+                context.startActivity(i2);
+            }
+        });
     }
 
     @Override
@@ -55,10 +68,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView imageView;
-
+        public TextView groupText;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            groupText = itemView.findViewById(R.id.groupUserItem);
             username = itemView.findViewById(R.id.nameUserItem);
             imageView = itemView.findViewById(R.id.imageUserItem);
         }

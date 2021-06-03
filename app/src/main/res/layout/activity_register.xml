@@ -131,4 +131,34 @@
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/register_button" />
 
+    <RadioGroup
+        android:id="@+id/groupRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_register"
+        >
+
+        <RadioButton
+            android:id="@+id/extrovertButton"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="@string/extro" />
+
+        <RadioButton
+            android:id="@+id/introvertButton"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:text="@string/intro" />
+
+        <RadioButton
+            android:id="@+id/ambivertButton"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ambi" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

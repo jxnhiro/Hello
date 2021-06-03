@@ -41,7 +41,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         StartActivity.this.setTitle("Hello!");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        myRef = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(firebaseUser.getUid());
+        myRef = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("MyUsers").child(firebaseUser.getUid());
 
 
         //Pas value user keganti
