@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username_register" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/btn_reset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -110,25 +110,55 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/spartan"
         android:text="Have an account?"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_reset" />
 
     <TextView
         android:id="@+id/gotologin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/font"
         android:text="Login"
         android:textColor="@color/purple_200"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/register_button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_reset" />
+
+    <RadioGroup
+        android:id="@+id/groupRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_register"
+        >
+
+        <RadioButton
+            android:id="@+id/extrovertButton"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="@string/extro" />
+
+        <RadioButton
+            android:id="@+id/introvertButton"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:text="@string/intro" />
+
+        <RadioButton
+            android:id="@+id/ambivertButton"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ambi" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

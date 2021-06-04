@@ -6,7 +6,7 @@ public class Users {
     private String id;
     private String username;
     private String imageURL;
-
+    private String group;
     //Getters and Setters
     public String getId() {
         return id;
@@ -32,14 +32,23 @@ public class Users {
         this.imageURL = imageURL;
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     //Constructors
     public Users(){
     }
 
-    public Users(String id, String username, String imageURL){
+    public Users(String id, String username, String imageURL, String group){
           this.id = id;
           this.username = username;
           this.imageURL = imageURL;
+          this.group = group;
     }
 
 
