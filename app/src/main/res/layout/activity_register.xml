@@ -131,34 +131,42 @@
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/btn_reset" />
 
-    <RadioGroup
-        android:id="@+id/groupRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+    <TableRow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_register"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/password_register">
 
-        <RadioButton
-            android:id="@+id/extrovertButton"
-            android:layout_width="125dp"
+        <RadioGroup
+            android:id="@+id/groupRadioGroup"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/extro" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/introvertButton"
-            android:layout_width="122dp"
-            android:layout_height="wrap_content"
-            android:text="@string/intro" />
+            <RadioButton
+                android:id="@+id/extrovertButton"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="@string/extro" />
 
-        <RadioButton
-            android:id="@+id/ambivertButton"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="@string/ambi" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/introvertButton"
+                android:layout_width="122dp"
+                android:layout_height="wrap_content"
+                android:text="@string/intro" />
+
+            <RadioButton
+                android:id="@+id/ambivertButton"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ambi" />
+        </RadioGroup>
+    </TableRow>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
