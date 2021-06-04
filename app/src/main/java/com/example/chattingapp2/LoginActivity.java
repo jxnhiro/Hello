@@ -1,7 +1,6 @@
 package com.example.chattingapp2;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,9 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText username_login, password_login;
     Button login_button;
-    TextView gotoregister;
+    TextView gotoregister, forgot_password;
 
 
     //Firebase
@@ -48,9 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         username_login = findViewById(R.id.username_login);
-        password_login = findViewById(R.id.password_login);
+        password_login = findViewById(R.id.send_email);
         login_button = findViewById(R.id.login_button);
         gotoregister = findViewById(R.id.gotoregister);
+        forgot_password = findViewById(R.id.forgot_password);
 
 
         //Firebase Authentication
@@ -62,6 +59,15 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
+
+
 
         //Login Button
         login_button.setOnClickListener(v -> {
