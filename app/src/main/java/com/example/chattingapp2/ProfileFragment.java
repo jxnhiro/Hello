@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
 
 
-    CircleImageView image_profile;
+    ImageView image_profile;
     TextView username;
 
     DatabaseReference reference;
@@ -123,27 +124,27 @@ public class ProfileFragment extends Fragment {
 
         if(imageUri != null){
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
-            + "."+getFileExtension(imageUri));
+                    + "."+getFileExtension(imageUri));
 
-             uploadTask = fileReference.getFile(imageUri);
-             uploadTask.continueWith(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                 @Override
-                 public Task<Uri> then(@NonNull Task task) throws Exception {
+            uploadTask = fileReference.putFile(imageUri);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task task) throws Exception {
                     if(!task.isSuccessful()){
                         throw task.getException();
                     }
                     return fileReference.getDownloadUrl();
-                 }
-             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                 @Override
-                 public void onComplete(@NonNull Task<Uri> task) {
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
-                        reference = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users").child(fuser.getUid());
+                        reference = FirebaseDatabase.getInstance("https://hello-2d0a6-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("MyUsers").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
-                        map.put("imageURL",mUri);
+                        map.put(("imageURL"),mUri);
                         reference.updateChildren(map);
 
                         pd.dismiss();
@@ -151,15 +152,15 @@ public class ProfileFragment extends Fragment {
                         Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
-                 }
-             }).addOnFailureListener(new OnFailureListener() {
-                 @Override
-                 public void onFailure(@NonNull Exception e) {
-                     Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                     pd.dismiss();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
 
-                 }
-             });
+                }
+            });
 
         }else{
             Toast.makeText(getContext(),"No Image Selected",Toast.LENGTH_SHORT).show();
@@ -167,14 +168,18 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
-                  && data != null && data.getData() != null){
-             imageUri = data.getData();
-        }else{
-            uploadImage();
+                && data != null && data.getData() != null){
+            imageUri = data.getData();
+
+            if(uploadTask != null && uploadTask.isInProgress()){
+                Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+            }else{
+                uploadImage();
+            }
         }
     }
 }
