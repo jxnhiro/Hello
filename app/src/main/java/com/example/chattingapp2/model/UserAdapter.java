@@ -40,13 +40,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users users = mUsers.get(position);
-        holder.username.setText(users.getUsername());
-        holder.groupText.setText(users.getGroup());
+        holder.unm.setText(users.getUsername());
+        holder.gT.setText(users.getGroup());
         if(users.getImageURL().equals("default")){
-            holder.imageView.setImageResource(R.mipmap.ic_launcher);
+            holder.imgV.setImageResource(R.mipmap.ic_launcher);
         }
         else{
-            Glide.with(context).load(users.getImageURL()).into(holder.imageView);
+            Glide.with(context).load(users.getImageURL()).into(holder.imgV);
         }
 
         //Click listener to chat
@@ -66,14 +66,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView username;
-        public ImageView imageView;
-        public TextView groupText;
+        public TextView unm;
+        public ImageView imgV;
+        public TextView gT;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            groupText = itemView.findViewById(R.id.groupUserItem);
-            username = itemView.findViewById(R.id.nameUserItem);
-            imageView = itemView.findViewById(R.id.imageUserItem);
+            gT = itemView.findViewById(R.id.groupUserItem);
+            unm = itemView.findViewById(R.id.nameUserItem);
+            imgV = itemView.findViewById(R.id.imageUserItem);
         }
     }
 }
