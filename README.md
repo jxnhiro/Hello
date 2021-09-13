@@ -3,6 +3,7 @@
 Hello! is an interactive chatting application where you may meet the people into your likings. 
 As for the initial use of the application, users must classify themselves as introvert, extrovert or ambivert to sign up.
 After being able to log in, users then can chat up people with other people's first impression of being an introvert, extrovert or ambivert.
+Last but not least, change your profile picture for people to know who you are!
 
 Features Used: Firebase, Java, and Glide 
 IDE: Android Studio
